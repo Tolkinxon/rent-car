@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "username": "hello",
+        "email": "hello@gmail.com",
+        "password": "hello",
+        "createdAt": "23.05.2025",
+        "updatedAt": null
+    },
+    {
+        "id": 2,
+        "username": "user",
+        "email": "user@gmail.com",
+        "password": "user",
+        "createdAt": "23.05.2025",
+        "updatedAt": null
+    },
+    {
+        "id": 3,
+        "username": "user",
+        "email": "user1@gmail.com",
+        "password": "user",
+        "createdAt": "23.05.2025",
+        "updatedAt": null
+    },
+    {
+        "id": 4,
+        "username": "bir",
+        "email": "bir@gmail.com",
+        "password": "bir",
+        "createdAt": "23.05.2025",
+        "updatedAt": null
+    }
+]

@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "description": "Yengil va qulay",
+        "price": "1500000",
+        "name": "Tayota",
+        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748068209/cars/assets/pfi21l7subrnh0szolrz.png"
+    },
+    {
+        "id": 2,
+        "description": "Yuqori tezlikda yuradi",
+        "price": "1200000",
+        "name": "Malibu",
+        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748070593/cars/assets/t8t01upvylgdmph8e0gm.jpg"
+    }
+]   
