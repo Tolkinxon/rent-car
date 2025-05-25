@@ -17,7 +17,8 @@ authSocketCallBack = function(socket){
     
     if(foundUser == undefined) return socket.emit('authError', {message: 'this user is not available'})
     if(foundUser?.password != data?.password) return socket.emit('authError', {message: 'this user is not available'})
-    return socket.emit('authSuccess', {messge: 'User successfully logged!', accessToken: createToken({id: foundUser.id})});
+    
+    return socket.emit('authSuccess', {messge: 'User successfully logged!', isAdmin: foundUser.isAdmin, accessToken: createToken({id: foundUser.id})});
   })
 }
 

@@ -1,18 +1,18 @@
 [
     {
-        "id": 4,
-        "description": "Malibu tez moshina",
-        "price": "2200000",
-        "name": "Malibu",
-        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748182607/cars/assets/ytpoydrpzeztb6srdcn5.jpg",
-        "public_id": "cars/assets/cmrcafpybmlv3nypyz9d"
+        "id": 2,
+        "description": "Mustang tez moshina",
+        "price": "1500000",
+        "name": "Mustang",
+        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748183336/cars/assets/mrq4vvyh8cevpcvsc3lt.png",
+        "public_id": "cars/assets/mrq4vvyh8cevpcvsc3lt"
     },
     {
-        "id": 5,
-        "description": "malibu tez moshina",
-        "price": "1500000",
-        "name": "malibu",
-        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748182386/cars/assets/npfmfbyfmpr5hinr32ze.jpg",
-        "public_id": "cars/assets/zly69ilpvtvuo3zhvbkq"
+        "id": 3,
+        "description": "Malibu tez moshina juda ham",
+        "price": "1220000",
+        "name": "Malibu",
+        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748197984/cars/assets/nmdfcaztcgkcdzj4jvam.jpg",
+        "public_id": "cars/assets/nmdfcaztcgkcdzj4jvam"
     }
 ]

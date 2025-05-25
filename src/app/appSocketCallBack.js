@@ -41,6 +41,7 @@ appSocketCallBack = async function(socket){
           cloudinary.uploader.destroy(cars[foundIndex].public_id, (error, result) => {
           if (error) {
             console.error("O'chirish xatosi:", error);
+            throw new Error(error)
           } else {
             console.log("O'chirish muvaffaqiyatli:", result);
           }
@@ -63,6 +64,53 @@ appSocketCallBack = async function(socket){
         socket.emit('editError', { error: err.message });
       }
     });
+    socket.on('deleteData', async (data) => {
+      try {
+        const cars = await readFile('cars');   
+        const foundIndex = cars.findIndex(item => item.id == data.id);
+        cloudinary.uploader.destroy(cars[foundIndex].public_id, (error, result) => {
+          if (error) {
+            console.error("O'chirish xatosi:", error);
+            throw new Error(error)
+          } else {
+            console.log("O'chirish muvaffaqiyatli:", result);
+          }
+        }); 
+        cars.splice(foundIndex, 1);     
+        await writeFile('cars', cars);
+        socket.emit('deleteSuccess', { message: 'Data successfully deleted' });
+      } catch (err) {
+        socket.emit('deleteError', { error: err.message });
+      }
+    });
+    socket.on('booking', async (data)=>{
+      const books = await readFile('books');
+      const cars = await readFile('cars');
+      const newBook = { id: books.length?books.at(-1).id+1:1, user_id: checking.id, car_id: data.id }
+      books.push(newBook);
+      await writeFile('books', books);
+      const filteredBooks = books.filter(item => item.user_id == checking.id);
+      const userBookedCars = [];
+      filteredBooks.forEach(item => {
+        const foundCar = cars.find(itemCar => itemCar.id == item.car_id)
+        const newFoundCar = structuredClone(foundCar);
+        if(foundCar != undefined){ newFoundCar.id = item.id; userBookedCars.push(newFoundCar); }
+      })
+      socket.emit('updatedBooking', userBookedCars);
+    })
+
+    socket.on('bookedCars', async ()=>{
+      const books = await readFile('books');
+      const cars = await readFile('cars');
+      const filteredBooks = books.filter(item => item.user_id == checking.id);
+      const userBookedCars = [];
+      filteredBooks.forEach(item => {
+        const foundCar = cars.find(itemCar => itemCar.id == Number(item.car_id));
+        const newFoundCar = structuredClone(foundCar);
+        if(foundCar != undefined){ newFoundCar.id = item.id; userBookedCars.push(newFoundCar); }
+      })
+      socket.emit('updatedBooking', userBookedCars);
+    })
 }
 
 module.exports = appSocketCallBack;

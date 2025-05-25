@@ -6,7 +6,7 @@ const { readFile } = require("../model/model");
     const tokenId = verifyToken(token).id;
     const users = await readFile('users');
     if(!users.some(item => item.id == tokenId)) return {message: 'This user is not available', status: false}
-    return {message: 'This user is available', status: true}
+    return {message: 'This user is available', status: true, id: tokenId }
 }
 
 module.exports = checkToken;

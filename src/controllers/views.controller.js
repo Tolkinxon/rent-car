@@ -24,5 +24,14 @@ module.exports = {
         catch(error){
             globalError(error, res)
         }
+    },
+    ADMIN_PAGE: async function(req, res){
+        try{
+            return res.render('admin');
+        }
+        catch(error){
+            globalError(error, res)
+        }
     }
+    
 }
