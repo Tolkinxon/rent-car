@@ -1,127 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="uz">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Rent Admin Panel</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #6a1b9a;
-            text-align: center;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        label {
-            font-weight: bold;
-        }
-        input, textarea, button {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input[type="file"] {
-            border: none;
-        }
-        button {
-            background-color: #6a1b9a;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #8e24aa;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background-color: #6a1b9a;
-            color: white;
-        }
-        .actions button {
-            margin-right: 5px;
-            background-color: #ab47bc;
-        }
-        .actions button.delete {
-            background-color: #d32f2f;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Car Rent Admin Panel</h1>
-        <form id="carForm" class="js-form">
-            <label for="image">Rasm yuklash</label>
-            <input type="file" id="fileInput" name="image" accept="image/*">
-
-            <label for="description">Mashina haqida</label>
-            <textarea id="description" name="description" rows="3"></textarea>
-
-            <label for="price">Narxi</label>
-            <input type="number" id="price" name="price" placeholder="Masalan: 500000">
-
-            <label for="name">Mashina nomi</label>
-            <input type="text" id="name" name="name" placeholder="Masalan: Chevrolet Spark">
-
-            <button type="submit">Mashina qo'shish</button>
-        </form>
-
-        <h2>Mashinalar ro'yxati</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Rasm</th>
-                    <th>Nom</th>
-                    <th>Haqida</th>
-                    <th>Narxi</th>
-                    <th>Amallar</th>
-                </tr>
-            </thead>
-            <tbody class="carList">
-    
-            </tbody>
-        </table>
-    </div>
-    <template class="carItem">
-                <tr>
-                    <td><img class="car_img" src="" alt="Sample" width="100"></td>
-                    <td class="car_name">Chevrolet Spark</td>
-                    <td class="car_description">Kichik hajmli shahar avtomobili</td>
-                    <td class="car_price" >500000</td>
-                    <td class="actions">
-                        <button class="car_edit">Edit</button>
-                        <button class="car_delete delete">Delete</button>
-                    </td>
-                </tr>
-    </template>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/index.js"></script>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -231,9 +107,9 @@
 <body>
     <div class="container">
         <h1>Car Rent Admin Panel</h1>
-        <form id="carForm">
+        <form id="carForm" class="js-form">
             <label for="image">Rasm yuklash</label>
-            <input type="file" id="image" name="image" accept="image/*">
+            <input type="file" id="fileInput" name="image" accept="image/*">
 
             <label for="description">Mashina haqida</label>
             <textarea id="description" name="description" rows="3"></textarea>
@@ -246,7 +122,6 @@
 
             <button type="submit">Mashina qo'shish</button>
         </form>
-
         <h2>Mashinalar ro'yxati</h2>
         <table>
             <thead>
@@ -258,31 +133,35 @@
                     <th>Amallar</th>
                 </tr>
             </thead>
-            <tbody id="carList">
-                <tr>
-                    <td><img src="https://via.placeholder.com/100" alt="Sample" width="100"></td>
-                    <td>Chevrolet Spark</td>
-                    <td>Kichik hajmli shahar avtomobili</td>
-                    <td>500000</td>
-                    <td class="actions">
-                        <button onclick="openEditModal('Chevrolet Spark', 'Kichik hajmli shahar avtomobili', 500000)">Edit</button>
-                        <button class="delete" onclick="openDeleteModal()">Delete</button>
-                    </td>
-                </tr>
+            <tbody id="carList" class="carList">
+        
             </tbody>
         </table>
     </div>
 
+    <template class="carItem">
+                <tr>
+                    <td><img class="car_img" src="" alt="Sample" width="100"></td>
+                    <td class="car_name">Chevrolet Spark</td>
+                    <td class="car_description">Kichik hajmli shahar avtomobili</td>
+                    <td class="car_price" >500000</td>
+                    <td class="actions">
+                        <button class="car_edit edit">Edit</button>
+                        <button class="car_delete delete">Delete</button>
+                    </td>
+                </tr>
+    </template>
+
     <div id="editModal" class="modal" onclick="closeModalOnOutside(event, 'editModal')">
-        <div class="modal-content">
+        <form class="modal-content js-edit-form">
             <h3>Edit Mashina</h3>
-            <input type="file" id="editImage">
-            <textarea id="editDescription" rows="3"></textarea>
-            <input type="number" id="editPrice" placeholder="Narxi">
-            <input type="text" id="editName" placeholder="Mashina nomi">
+            <input type="file" id="editImage" name="image">
+            <textarea id="editDescription" rows="3" name="description"></textarea>
+            <input type="number" id="editPrice" placeholder="Narxi" name="price">
+            <input type="text" id="editName" placeholder="Mashina nomi" name="name">
             <div class="modal-footer">
-                <button onclick="saveEdit()">Edit</button>
-            </div>
+                <button type="submit">Edit</button>
+            </form>
         </div>
     </div>
 
@@ -295,42 +174,9 @@
             </div>
         </div>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/index.js"></script>
 
-    <script>
-        function openEditModal(name = '', description = '', price = '') {
-            document.getElementById('editModal').style.display = 'block';
-            document.getElementById('editName').value = name;
-            document.getElementById('editDescription').value = description;
-            document.getElementById('editPrice').value = price;
-        }
 
-        function closeEditModal() {
-            document.getElementById('editModal').style.display = 'none';
-        }
-
-        function saveEdit() {
-            closeEditModal();
-            alert('Mashina ma\'lumotlari o\'zgartirildi!');
-        }
-
-        function openDeleteModal() {
-            document.getElementById('deleteModal').style.display = 'block';
-        }
-
-        function closeDeleteModal() {
-            document.getElementById('deleteModal').style.display = 'none';
-        }
-
-        function confirmDelete() {
-            closeDeleteModal();
-            alert('Mashina o\'chirildi!');
-        }
-
-        function closeModalOnOutside(event, modalId) {
-            if (event.target.id === modalId) {
-                document.getElementById(modalId).style.display = 'none';
-            }
-        }
-    </script>
 </body>
 </html>

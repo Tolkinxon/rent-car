@@ -1,16 +1,18 @@
 [
     {
-        "id": 1,
-        "description": "Yengil va qulay",
-        "price": "1500000",
-        "name": "Tayota",
-        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748068209/cars/assets/pfi21l7subrnh0szolrz.png"
+        "id": 4,
+        "description": "Malibu tez moshina",
+        "price": "2200000",
+        "name": "Malibu",
+        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748182607/cars/assets/ytpoydrpzeztb6srdcn5.jpg",
+        "public_id": "cars/assets/cmrcafpybmlv3nypyz9d"
     },
     {
-        "id": 2,
-        "description": "Yuqori tezlikda yuradi",
-        "price": "1200000",
-        "name": "Malibu",
-        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748070593/cars/assets/t8t01upvylgdmph8e0gm.jpg"
+        "id": 5,
+        "description": "malibu tez moshina",
+        "price": "1500000",
+        "name": "malibu",
+        "img_url": "https://res.cloudinary.com/dbf64kr96/image/upload/v1748182386/cars/assets/npfmfbyfmpr5hinr32ze.jpg",
+        "public_id": "cars/assets/zly69ilpvtvuo3zhvbkq"
     }
-]   
+]
