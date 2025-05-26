@@ -13,6 +13,17 @@ appSocketCallBack = async function(socket){
       socket.emit('getData', cars);
     })
 
+    function updatedBooking(books, cars, checking){
+      const filteredBooks = books.filter(item => item.user_id == checking.id);
+      const userBookedCars = [];
+      filteredBooks.forEach(item => {
+        const foundCar = cars.find(itemCar => itemCar.id == item.car_id)
+        const newFoundCar = structuredClone(foundCar);
+        if(foundCar != undefined){ newFoundCar.id = item.id; userBookedCars.push(newFoundCar); }
+      })
+      socket.emit('updatedBooking', userBookedCars);
+    }
+
     socket.on('uploadData', async (data) => {
       try {
         const buffer = Buffer.from(data.file, 'base64');
@@ -89,14 +100,16 @@ appSocketCallBack = async function(socket){
       const newBook = { id: books.length?books.at(-1).id+1:1, user_id: checking.id, car_id: data.id }
       books.push(newBook);
       await writeFile('books', books);
-      const filteredBooks = books.filter(item => item.user_id == checking.id);
-      const userBookedCars = [];
-      filteredBooks.forEach(item => {
-        const foundCar = cars.find(itemCar => itemCar.id == item.car_id)
-        const newFoundCar = structuredClone(foundCar);
-        if(foundCar != undefined){ newFoundCar.id = item.id; userBookedCars.push(newFoundCar); }
-      })
-      socket.emit('updatedBooking', userBookedCars);
+      updatedBooking(books, cars, checking);
+    })
+
+    socket.on('removeBooking', async (data)=>{
+      const books = await readFile('books');
+      const cars = await readFile('cars');
+      const foundIndex = books.findIndex(item => item.user_id == checking.id);
+      books.splice(foundIndex, 1);
+      await writeFile('books', books);
+      updatedBooking(books, cars, checking);
     })
 
     socket.on('bookedCars', async ()=>{

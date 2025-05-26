@@ -39,22 +39,18 @@ elList.addEventListener('click', (evt)=>{
     }
 })
 
-socket.emit('bookedCars');
-socket.on('updatedBooking',(data)=>{
-    console.log(data);
-    
-    render(data, elListBooking, elItemBooking);
+
+elListBooking.addEventListener('click', (evt)=>{
+    const bookingId = evt.target.matches('.car_booking');
+    if(bookingId) {
+        socket.emit('removeBooking', { id: evt.target.dataset.id });
+        socket.on('updatedBooking',(data)=>{
+            render(data, elListBooking, elItemBooking);
+        })
+    }
 })
 
-        function bookCar(button) {
-            const row = button.closest('tr');
-            const clonedRow = row.cloneNode(true);
-            clonedRow.querySelector('button').textContent = 'Remove';
-            clonedRow.querySelector('button').setAttribute('onclick', 'removeCar(this)');
-            document.querySelector('#bookedTable tbody').appendChild(clonedRow);
-        }
-
-        function removeCar(button) {
-            const row = button.closest('tr');
-            row.remove();
-        }
+socket.emit('bookedCars');
+socket.on('updatedBooking',(data)=>{
+    render(data, elListBooking, elItemBooking);
+})
